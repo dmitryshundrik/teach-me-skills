@@ -4,24 +4,35 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public final static String EXIT = "ВЫХОД";
+    private final static String EXIT = "ВЫХОД";
+    private final static String HISTORY = "ИСТОРИЯ";
+    private Scanner scanner = new Scanner(System.in);
+    private Calculator calculator = new CalculatorImpl();
 
     public void start() {
         while (true) {
-            Scanner scanner = new Scanner(System.in);
-            Calculator calculator = new CalculatorImpl();
-            System.out.println("Введите данные для операции или ВЫХОД, чтобы завершить программу:");
+            System.out.println("Введите данные для операции, ИСТОРИЯ для просмотра списка результатов или ВЫХОД," +
+                    " чтобы завершить программу:");
             String firstNumber = scanner.nextLine();
-            if (firstNumber.equalsIgnoreCase(EXIT)) {
+            if (isEqualWithExit(firstNumber)) {
                 break;
+            } else if (isEqualWithHistory(firstNumber)) {
+                OperationsHistory.printValues();
+                continue;
             }
             String secondNumber = scanner.nextLine();
-            if (secondNumber.equalsIgnoreCase(EXIT)) {
+            if (isEqualWithExit(secondNumber)) {
                 break;
+            } else if (isEqualWithHistory(secondNumber)) {
+                OperationsHistory.printValues();
+                continue;
             }
             String operation = scanner.nextLine();
-            if (operation.equalsIgnoreCase(EXIT)) {
+            if (isEqualWithExit(operation)) {
                 break;
+            } else if (isEqualWithHistory(operation)) {
+                OperationsHistory.printValues();
+                continue;
             }
 
             if (operation.equals("+") || operation.equals("-") || operation.equals("*") || operation.equals("/")) {
@@ -34,5 +45,13 @@ public class Menu {
                 System.out.println("Введите корркетный оператор!");
             }
         }
+    }
+
+    private boolean isEqualWithExit(String string) {
+        return (EXIT.equalsIgnoreCase(string));
+    }
+
+    private boolean isEqualWithHistory(String string) {
+        return (HISTORY.equalsIgnoreCase(string));
     }
 }

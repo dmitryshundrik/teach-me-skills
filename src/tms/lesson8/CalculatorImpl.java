@@ -2,7 +2,7 @@ package tms.lesson8;
 
 public class CalculatorImpl implements Calculator {
 
-    public void operation(double firstNumber, double secondNumber, String operation) {
+    public void operation(User currentUser, double firstNumber, double secondNumber, String operation) {
         double result = 0;
         switch (operation) {
             case "+":
@@ -22,6 +22,6 @@ public class CalculatorImpl implements Calculator {
                 System.out.println("Результат: " + (firstNumber / secondNumber));
                 break;
         }
-        OperationsHistory.setValue(result);
+        currentUser.setValue(result);
     }
 }

@@ -10,7 +10,6 @@ public class Cargo extends Ground {
 
     public void isCapacityAvailable(int cargoWeight) {
         System.out.println(loadCapacity - cargoWeight > 0 ? "Грузовик загружен" : "Вам нужен грузовик побольше");
-        loadCapacity += cargoWeight;
     }
 
     @Override

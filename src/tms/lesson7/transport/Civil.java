@@ -12,7 +12,6 @@ public class Civil extends Air {
 
     public void isCapacityAvailable(int passengers) {
         System.out.println(passengerCount - passengers > 0 ? "Самолет загружен" : "Вам нужен самолет побольше");
-        passengerCount += passengers;
     }
 
     @Override

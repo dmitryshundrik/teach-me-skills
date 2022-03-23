@@ -39,13 +39,13 @@ public class Menu {
         while (true) {
             System.out.println("Создайте ЛОГИН:");
             String login = scanner.nextLine().trim();
-            if (DataBase.getUser(login) == null && !login.equals("")) {
+            if (!"".equals(login) && DataBase.getUser(login) == null) {
                 System.out.println("Создайте ПАРОЛЬ:");
                 String password = scanner.nextLine().trim();
-                if (!password.equals("")) {
+                if (!"".equals(password)) {
                     System.out.println("Создайте ИМЯ:");
                     String name = scanner.nextLine().trim();
-                    if (!name.equals("")) {
+                    if (!"".equals(name)) {
                         DataBase.setUser(new User(name, login, password));
                         System.out.println("Вы успешно зарегистрировались!");
                         authorization();
@@ -68,8 +68,9 @@ public class Menu {
             String login = scanner.nextLine().trim();
             System.out.println("Ваш ПАРОЛЬ:");
             String password = scanner.nextLine().trim();
-            if (DataBase.getUser(login) != null && DataBase.getUser(login).getPassword().equalsIgnoreCase(password)) {
-                currentUser = DataBase.getUser(login);
+            User user = DataBase.getUser(login);
+            if (user != null && user.getPassword().equals(password)) {
+                currentUser = user;
                 System.out.println("Добро пожаловать, " + currentUser.getName());
                 break;
             } else {

@@ -1,9 +1,9 @@
 package tms.lesson8;
 
 public class User {
-    private String name;
     private String login;
     private String password;
+    private String name;
     private double[] values = new double[1000];
     private int countValues = 0;
 
@@ -25,7 +25,7 @@ public class User {
         }
     }
 
-    public User(String name, String login, String password) {
+    public User(String login, String password, String name) {
         this.name = name;
         this.login = login;
         this.password = password;

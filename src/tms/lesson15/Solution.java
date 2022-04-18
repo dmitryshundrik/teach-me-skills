@@ -1,9 +1,7 @@
 package tms.lesson15;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 public class Solution {
     public static void main(String[] args) {
@@ -28,12 +26,7 @@ public class Solution {
                 .forEach(System.out::println);
 
         list.stream()
-                .sorted(new Comparator<Integer>() {
-                    @Override
-                    public int compare(Integer t1, Integer t2) {
-                        return t2 - t1;
-                    }
-                })
+                .sorted((t1, t2) -> t2 - t1)
                 .forEach(System.out::println);
 
         list.stream()
@@ -60,12 +53,7 @@ public class Solution {
                 .skip(5)
                 .limit(10)
                 .map(value -> value * 10)
-                .sorted(new Comparator<Integer>() {
-                    @Override
-                    public int compare(Integer integer, Integer t1) {
-                        return t1 - integer;
-                    }
-                })
+                .sorted((integer, t1) -> t1 - integer)
                 .forEach(value -> System.out.println(value + 5));
     }
 }

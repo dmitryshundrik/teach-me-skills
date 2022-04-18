@@ -1,4 +1,4 @@
-package tms;
+package tms.lesson4;
 
 import java.util.Scanner;
 

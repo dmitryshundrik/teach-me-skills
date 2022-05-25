@@ -1,0 +1,25 @@
+GET http://localhost:8080/cal?num1=4&num2=8&operation=mul
+
+###
+
+POST http://localhost:8080/aut
+Content-Type: application/x-www-form-urlencoded
+
+username=test&password=test
+
+###
+
+POST http://localhost:8080/reg
+Content-Type: application/x-www-form-urlencoded
+
+name=Test&username=test&password=test
+
+###
+
+POST http://localhost:8080/logout
+
+###
+
+GET http://localhost:8080/findHistory
+
+###

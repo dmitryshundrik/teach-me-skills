@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/findHistory")
+@WebServlet(urlPatterns = "/findHistory", name = "FindHistoryServlet")
 public class FindHistoryServlet extends HttpServlet {
 
     private final OperationStorage operationStorage = new OperationStorage();
@@ -21,8 +21,8 @@ public class FindHistoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User currentUser = (User) req.getSession().getAttribute("currentUser");
         List<Operation> allOperationByUsername = operationStorage.findAllOperationByUsername(currentUser.getUsername());
-        for (Operation operation : allOperationByUsername) {
-            resp.getWriter().println(operation);
-        }
+        req.setAttribute("operations", allOperationByUsername);
+        getServletContext().getRequestDispatcher("/history.jsp").forward(req, resp);
+
     }
 }

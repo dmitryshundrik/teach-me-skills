@@ -11,10 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(urlPatterns = "/aut")
+@WebServlet(urlPatterns = "/auth", name = "AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
 
     private final UserStorage userStorage = new UserStorage();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        getServletContext().getRequestDispatcher("/auth.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,11 +30,14 @@ public class AuthenticationServlet extends HttpServlet {
             User user = byUsername.get();
             if (user.getPassword().equals(password)) {
                 req.getSession().setAttribute("currentUser", user);
+                resp.sendRedirect("/calc");
             } else {
-                resp.getWriter().println("Wrong password!");
+                req.setAttribute("message", "Wrong password!");
+                getServletContext().getRequestDispatcher("/auth.jsp").forward(req, resp);
             }
         } else {
-            resp.getWriter().println("User not found!");
+            req.setAttribute("message", "User not found!");
+            getServletContext().getRequestDispatcher("/auth.jsp").forward(req, resp);
         }
     }
 }

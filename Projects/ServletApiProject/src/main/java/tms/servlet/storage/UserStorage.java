@@ -1,25 +1,53 @@
 package tms.servlet.storage;
 
 import tms.servlet.entity.User;
+import tms.servlet.service.DatabaseConnection;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 import java.util.Optional;
 
 public class UserStorage {
 
-    private static List<User> userLis = new ArrayList<>();
+    private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    public void save(User user) {
-        userLis.add(user);
+    public User createUser(String name, String username, String password) {
+        User user = new User();
+        user.setName(name);
+        user.setUsername(username);
+        user.setPassword(password);
+        return user;
     }
 
-    public Optional<User> findByUsername(String username) {
-        for (User user : userLis) {
-            if (user.getUsername().equalsIgnoreCase(username)) {
-                return Optional.of(user);
-            }
+    public void save(User user) {
+        try {
+            PreparedStatement prepareStatement = databaseConnection.connection().
+                    prepareStatement("insert into users values (?,?,?)");
+            prepareStatement.setString(1, user.getUsername());
+            prepareStatement.setString(2, user.getName());
+            prepareStatement.setString(3, user.getPassword());
+            prepareStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return Optional.empty();
+    }
+
+    public Optional<User> findByUsername(String requiredUsername) {
+        try {
+            PreparedStatement preparedStatement = databaseConnection.connection().
+                    prepareStatement("select * from users where username = ?");
+            preparedStatement.setString(1, requiredUsername);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                User user = new User();
+                user.setUsername(resultSet.getString(1));
+                user.setName(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
+                return Optional.of(user);
+            } else {
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

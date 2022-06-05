@@ -1,6 +1,6 @@
 package tms.servlet.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Operation {
     private double num1;
@@ -8,19 +8,7 @@ public class Operation {
     private String operation;
     private String result;
     private User user;
-    private LocalDateTime date;
-
-
-    public Operation createOperation(double num1, double num2, String operationName, String result, User currentUser) {
-        Operation operation = new Operation();
-        operation.setNum1(num1);
-        operation.setNum2(num2);
-        operation.setOperation(operationName);
-        operation.setResult(result);
-        operation.setUser(currentUser);
-        operation.setDate(LocalDateTime.now());
-        return operation;
-    }
+    private Date date;
 
     public double getNum1() {
         return num1;
@@ -54,11 +42,11 @@ public class Operation {
         this.user = user;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -72,13 +60,22 @@ public class Operation {
 
     @Override
     public String toString() {
-        return "Operation{" +
-                "num1=" + num1 +
-                ", num2=" + num2 +
-                ", operation='" + operation + '\'' +
-                ", result='" + result + '\'' +
-                ", user=" + user +
-                ", date=" + date +
-                '}';
+        String stringOperation = "";
+        switch (operation) {
+            case "sum":
+                stringOperation = "+";
+                break;
+            case "sub":
+                stringOperation = "-";
+                break;
+            case "mul":
+                stringOperation = "*";
+                break;
+            case "div":
+                stringOperation = "/";
+                break;
+
+        }
+        return date + " " + num1 + " " + stringOperation + " " + num2 + " = " + result;
     }
 }

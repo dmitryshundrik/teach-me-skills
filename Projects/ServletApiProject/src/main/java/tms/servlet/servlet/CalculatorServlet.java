@@ -1,8 +1,10 @@
 package tms.servlet.servlet;
 
+import tms.servlet.dao.OperationDao;
 import tms.servlet.entity.User;
-import tms.servlet.service.Calculator;
-import tms.servlet.storage.OperationStorage;
+import tms.servlet.service.OperationService;
+import tms.servlet.service.OperationServiceImpl;
+import tms.servlet.dao.OperationDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +16,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/calc", name = "CalculatorServlet")
 public class CalculatorServlet extends HttpServlet {
 
-    private final OperationStorage operationStorage = new OperationStorage();
-    private final Calculator calculator = new Calculator();
+    private final OperationDao operationDao = new OperationDaoImpl();
+    private final OperationService operationService = OperationServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,9 +30,9 @@ public class CalculatorServlet extends HttpServlet {
         double num2 = Double.parseDouble(req.getParameter("num2"));
         String operationName = req.getParameter("operation");
 
-        String result = String.valueOf(calculator.calculate(num1, num2, operationName));
+        String result = String.valueOf(operationService.calculate(num1, num2, operationName));
         User currentUser = (User) req.getSession().getAttribute("currentUser");
-        operationStorage.save(operationStorage.createOperation(num1, num2, operationName, result, currentUser));
+        operationDao.save(operationDao.createOperation(num1, num2, operationName, result, currentUser));
 
         req.setAttribute("result", result);
         getServletContext().getRequestDispatcher("/calc.jsp").forward(req, resp);

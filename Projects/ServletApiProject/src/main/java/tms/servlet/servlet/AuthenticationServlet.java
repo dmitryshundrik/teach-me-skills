@@ -1,7 +1,8 @@
 package tms.servlet.servlet;
 
+import tms.servlet.dao.UserDao;
 import tms.servlet.entity.User;
-import tms.servlet.storage.UserStorage;
+import tms.servlet.dao.UserDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @WebServlet(urlPatterns = "/auth", name = "AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
 
-    private final UserStorage userStorage = new UserStorage();
+    private final UserDao userDao = new UserDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +26,7 @@ public class AuthenticationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        Optional<User> byUsername = userStorage.findByUsername(username);
+        Optional<User> byUsername = userDao.findByUsername(username);
         if (byUsername.isPresent()) {
             User user = byUsername.get();
             if (user.getPassword().equals(password)) {

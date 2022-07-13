@@ -15,13 +15,11 @@ public class DatabaseConnection {
     }
 
     public Connection connection() {
-        Connection connection;
-        try {
-            connection = DriverManager.
-                    getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
+        try (Connection connection = DriverManager.
+                getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");) {
+            return connection;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return connection;
     }
 }

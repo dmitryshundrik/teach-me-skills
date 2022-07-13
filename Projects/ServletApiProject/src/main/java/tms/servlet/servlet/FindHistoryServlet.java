@@ -1,8 +1,9 @@
 package tms.servlet.servlet;
 
+import tms.servlet.dao.OperationDao;
 import tms.servlet.entity.Operation;
 import tms.servlet.entity.User;
-import tms.servlet.storage.OperationStorage;
+import tms.servlet.dao.OperationDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,12 +16,12 @@ import java.util.List;
 @WebServlet(urlPatterns = "/findHistory", name = "FindHistoryServlet")
 public class FindHistoryServlet extends HttpServlet {
 
-    private final OperationStorage operationStorage = new OperationStorage();
+    private final OperationDao operationDao = new OperationDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User currentUser = (User) req.getSession().getAttribute("currentUser");
-        List<Operation> allOperationByUsername = operationStorage.findAllOperationByUsername(currentUser.getUsername());
+        List<Operation> allOperationByUsername = operationDao.findAllOperationByUsername(currentUser.getUsername());
         req.setAttribute("operations", allOperationByUsername);
         getServletContext().getRequestDispatcher("/history.jsp").forward(req, resp);
 

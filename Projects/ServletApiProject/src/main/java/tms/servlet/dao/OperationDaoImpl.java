@@ -1,4 +1,4 @@
-package tms.servlet.storage;
+package tms.servlet.dao;
 
 import tms.servlet.entity.Operation;
 import tms.servlet.entity.User;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OperationStorage {
+public class OperationDaoImpl implements OperationDao {
 
     private final DatabaseConnection databaseConnection = new DatabaseConnection();
-    private final UserStorage userStorage = new UserStorage();
+    private final UserDaoImpl userDaoImpl = new UserDaoImpl();
 
     public Operation createOperation(double num1, double num2, String operationName, String result, User currentUser) {
         Operation operation = new Operation();
@@ -53,7 +53,7 @@ public class OperationStorage {
                 operation.setNum1(resultSet.getDouble(1));
                 operation.setNum2(resultSet.getDouble(2));
                 operation.setOperation(resultSet.getString(3));
-                operation.setUser(userStorage.findByUsername(resultSet.getString(4)).get());
+                operation.setUser(userDaoImpl.findByUsername(resultSet.getString(4)).get());
                 operation.setDate(resultSet.getDate(5));
                 operation.setResult(resultSet.getString(6));
                 operations.add(operation);

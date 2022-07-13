@@ -1,6 +1,7 @@
 package tms.servlet.servlet;
 
-import tms.servlet.storage.UserStorage;
+import tms.servlet.dao.UserDao;
+import tms.servlet.dao.UserDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/reg", name = "RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
-    private final UserStorage userStorage = new UserStorage();
+    private final UserDao userDao = new UserDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,11 +25,11 @@ public class RegistrationServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        if(userStorage.findByUsername(username).isPresent()) {
+        if(userDao.findByUsername(username).isPresent()) {
             req.setAttribute("message", "Wrong username!");
             getServletContext().getRequestDispatcher("/reg.jsp").forward(req, resp);
         } else {
-            userStorage.save(userStorage.createUser(name, username, password));
+            userDao.save(userDao.createUser(name, username, password));
             resp.sendRedirect("/");
         }
     }

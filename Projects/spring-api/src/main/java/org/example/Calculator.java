@@ -60,8 +60,9 @@ public class Calculator {
         }
     }
 
-    public boolean close() {
+    public boolean proceed() {
         while (true) {
+            System.out.println("Хотите продолжить?");
             String answer = scanner.nextLine().trim();
             if (YES.equalsIgnoreCase(answer)) {
                 return true;

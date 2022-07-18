@@ -24,8 +24,7 @@ public class Application {
 
         calculator.executeOperation(firstNumber, secondNumber, operationString);
 
-        System.out.println("Хотите продолжить?");
-        if (calculator.close()) {
+        if (calculator.proceed()) {
             start();
         } else {
             System.out.println("До свидания!");

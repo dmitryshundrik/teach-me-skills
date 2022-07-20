@@ -20,7 +20,6 @@ public class ServicesAspect {
 
     @Before("calculatorServicePointcut()")
     public void beforeMethod(JoinPoint joinPoint) {
-        System.out.println("some text...");
         logger.log(Level.INFO, joinPoint.toString());
     }
 }

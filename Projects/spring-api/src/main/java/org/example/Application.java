@@ -1,34 +1,78 @@
 package org.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Application {
-    private final Calculator calculator;
+    private final CalculatorService calculator;
+    private final Reader reader;
+    private final Writer writer;
 
-    @Autowired
-    public Application(Calculator calculator) {
+    private final static String NUMBER_1 = "Первое число:";
+    private final static String NUMBER_2 = "Второе число:";
+    private final static String OPERATION = "Операция:";
+    private final static String WRONG_FORMAT = "Неверный формат, введите еще раз:";
+    private final static String RESULT = "Результат: ";
+    private final static String PROCEED = "Хотите продолжить?";
+
+    public Application(CalculatorService calculator, Reader reader, Writer writer) {
         this.calculator = calculator;
+        this.reader = reader;
+        this.writer = writer;
     }
 
     public void start() {
-        System.out.println("Введите number1: ");
-        double firstNumber = calculator.verifyNumber();
+        writer.write(NUMBER_1);
+        double firstNumber = enterNumber();
 
-        System.out.println("Введите number2: ");
-        double secondNumber = calculator.verifyNumber();
+        writer.write(NUMBER_2);
+        double secondNumber = enterNumber();
 
-        System.out.println("Введите операцию: ");
-        String operationString = calculator.verifyOperation();
+        writer.write(OPERATION);
+        String operation = enterOperation();
 
-        calculator.executeOperation(firstNumber, secondNumber, operationString);
+        writer.write(RESULT + calculator.execute(firstNumber, secondNumber, operation));
 
-        if (calculator.proceed()) {
+        if (proceed()) {
             start();
-        } else {
-            System.out.println("До свидания!");
         }
+    }
 
+    public double enterNumber() {
+        double number = 0;
+        while (true) {
+            try {
+                number = Double.parseDouble(reader.read());
+                break;
+            } catch (NumberFormatException e) {
+                writer.write(WRONG_FORMAT);
+            }
+        }
+        return number;
+    }
+
+    public String enterOperation() {
+        String operation = "";
+        while (true) {
+            operation = reader.read();
+            if (operation.equals("+") || operation.equals("-") || operation.equals("*") || operation.equals("/")) {
+                return operation;
+            } else {
+                writer.write(WRONG_FORMAT);
+            }
+        }
+    }
+
+    public boolean proceed() {
+        while (true) {
+            writer.write(PROCEED);
+            String answer = reader.read();
+            if ("YES".equalsIgnoreCase(answer)) {
+                return true;
+            }
+            if ("NO".equalsIgnoreCase(answer)) {
+                return false;
+            }
+        }
     }
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+<form action="/home/calc" method="post">
+    <input type="text" name="firstNumber" placeholder="number">
+    <input type="text" name="secondNumber" placeholder="number">
+    <input type="text" name="operation" placeholder="operation">
+    <button>Submit</button>
+    <p th:text="${message}"></p>
+</form>
+</body>
+</html>

@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
 </head>
 <body>
-<form action="/home/calc" method="post">
-    <input type="text" name="firstNumber" placeholder="number">
-    <input type="text" name="secondNumber" placeholder="number">
-    <input type="text" name="operation" placeholder="operation">
-    <button>Submit</button>
-    <p th:text="${message}"></p>
-</form>
+<div style="position: absolute; top:35%; left: 43%; font-size: 20px">
+    <form th:action="@{/calc/main}" method="post" th:object="${operation}">
+        <input th:field="*{firstNumber}" placeholder="number">
+        <p th:if="${#fields.hasErrors('firstNumber')}" th:errors="*{firstNumber}"></p>
+        <br>
+        <input th:field="*{secondNumber}" placeholder="number">
+        <p th:if="${#fields.hasErrors('secondNumber')}" th:errors="*{secondNumber}"></p>
+        <br>
+        <input th:field="*{operation}" placeholder="operation">
+        <p th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}"></p>
+        <br>
+        <p th:text="${result}"></p>
+        <br>
+        <button>Submit</button>
+        <br>
+    </form>
+    <form action="/">
+        <input type="submit" value="Back" />
+    </form>
+</div>
 </body>
 </html>

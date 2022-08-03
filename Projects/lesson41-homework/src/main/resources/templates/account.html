@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+<div style="position: absolute; top:35%; left: 43%; font-size: 20px">
+    <form th:action="@{/user/account}" method="post" th:object="${accountUserModel}">
+        <input th:field="*{newName}" placeholder="new name">
+        <br>
+        <input th:field="*{currentPassword}" placeholder="current password" type="password">
+        <br>
+        <input th:field="*{newPassword}" placeholder="new password" type="password">
+        <br>
+        <p th:text="${message}"></p>
+        <br>
+        <button>Save Changes</button>
+        <br>
+    </form>
+    <form action="/">
+        <input type="submit" value="Back" />
+    </form>
+</div>
+</body>
+</html>

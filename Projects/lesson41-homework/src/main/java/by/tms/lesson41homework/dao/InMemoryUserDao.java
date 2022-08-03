@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class InMemoryUserDao {
+public class InMemoryUserDao implements UserDao<User> {
     private final List<User> users = new ArrayList<>();
 
     public void save(User user) {

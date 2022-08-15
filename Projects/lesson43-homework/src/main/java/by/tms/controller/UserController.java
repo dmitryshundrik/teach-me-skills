@@ -1,7 +1,9 @@
 package by.tms.controller;
 
+import by.tms.entity.Telephone;
 import by.tms.entity.User;
 import by.tms.model.LoginUserModel;
+import by.tms.model.RegistrationUserModel;
 import by.tms.model.SettingsUserModel;
 import by.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +28,17 @@ public class UserController {
 
     @GetMapping("/reg")
     public String registration(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("registrationUserModel", new RegistrationUserModel());
         return "registration";
     }
 
     @PostMapping("/reg")
-    public String registration(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String registration(@Valid @ModelAttribute("registrationUserModel") RegistrationUserModel registrationUserModel,
+                               BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
+        User user = userService.userModelToUserConverter(registrationUserModel);
         userService.save(user);
         return "redirect:/";
     }
@@ -80,6 +84,17 @@ public class UserController {
             currentUser.setName(settingsUserModel.getNewName());
             model.addAttribute("message", "Name changed!");
         }
+
+        if (!settingsUserModel.getNewPhoneNumber1().isBlank()) {
+            currentUser.getTelephones().set(0, new Telephone(0, settingsUserModel.getNewPhoneNumber1()));
+            model.addAttribute("message", "Phone number changed!");
+        }
+
+        if (!settingsUserModel.getNewPhoneNumber2().isBlank()) {
+            currentUser.getTelephones().set(1, new Telephone(0, settingsUserModel.getNewPhoneNumber2()));
+            model.addAttribute("message", "Phone number changed!");
+        }
+
         if (!settingsUserModel.getNewPassword().isBlank()) {
             if (currentUser.getPassword().equals(settingsUserModel.getCurrentPassword())) {
                 currentUser.setPassword(settingsUserModel.getNewPassword());
@@ -87,22 +102,21 @@ public class UserController {
             } else {
                 model.addAttribute("message", "Wrong current password!");
             }
-            return "settings";
         }
         userService.update(currentUser);
         session.setAttribute("currentUser", currentUser);
         return "settings";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    @GetMapping("/delete")
+    public String delete(HttpSession session) {
+        userService.delete(((User) session.getAttribute("currentUser")).getId());
         session.invalidate();
         return "redirect:/";
     }
 
-    @GetMapping("/delete")
-    public String delete(HttpSession session) {
-        userService.delete(((User) session.getAttribute("currentUser")).getId());
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }

@@ -71,6 +71,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        hibernateProperties.setProperty("show_sql", "true");
 
         return hibernateProperties;
     }

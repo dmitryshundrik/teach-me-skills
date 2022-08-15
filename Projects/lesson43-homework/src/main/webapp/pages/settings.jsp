@@ -14,9 +14,22 @@
 <body>
 <div style="position: absolute; top:35%; left: 45%; font-size: 20px">
     <s:form method="post" action="/user/settings" modelAttribute="settingsUserModel">
+        <p>current name: ${sessionScope.currentUser.name}</p>
         <s:input path="newName" placeholder="new name"/>
         <br>
         <s:errors path="newName"/>
+        <br>
+
+        <p>current number: ${sessionScope.currentUser.telephones.get(0)}</p>
+        <s:input path="newPhoneNumber1" placeholder="new phone number"/>
+        <br>
+        <s:errors path="newPhoneNumber1"/>
+        <br>
+
+        <p>current number: ${sessionScope.currentUser.telephones.get(1)}</p>
+        <s:input path="newPhoneNumber2" placeholder="new phone number"/>
+        <br>
+        <s:errors path="newPhoneNumber2"/>
         <br>
 
         <s:input path="newPassword" placeholder="new password"/>

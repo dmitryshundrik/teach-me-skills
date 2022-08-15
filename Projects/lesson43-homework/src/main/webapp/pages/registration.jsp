@@ -13,7 +13,7 @@
 </head>
 <body>
 <div style="position: absolute; top:35%; left: 45%; font-size: 20px">
-    <s:form method="post" action="/user/reg" modelAttribute="user">
+    <s:form method="post" action="/user/reg" modelAttribute="registrationUserModel">
         <s:input path="name" placeholder="name"/>
         <br>
         <s:errors path="name"/>
@@ -27,6 +27,32 @@
         <s:input path="password" placeholder="password"/>
         <br>
         <s:errors path="password"/>
+        <br>
+
+        <s:input path="city" placeholder="city"/>
+        <br>
+        <s:errors path="city"/>
+        <br>
+
+        <s:input path="street" placeholder="street"/>
+        <br>
+        <s:errors path="street"/>
+        <br>
+
+        <s:input path="firstNumber" placeholder="first number"/>
+        <br>
+        <s:errors path="firstNumber"/>
+        <br>
+
+        <s:input path="secondNumber" placeholder="second number"/>
+        <br>
+        <s:errors path="secondNumber"/>
+        <br>
+
+        <s:input path="role" placeholder="role"/>
+        <br>
+        <s:errors path="role"/>
+        <br>
 
         <p>${message}</p>
 

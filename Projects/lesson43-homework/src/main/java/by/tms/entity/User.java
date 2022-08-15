@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -31,4 +32,12 @@ public class User {
     @NotEmpty
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Telephone> telephones;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

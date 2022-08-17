@@ -7,10 +7,12 @@ import by.tms.entity.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CalculatorService {
 
     @Autowired
@@ -21,6 +23,7 @@ public class CalculatorService {
         operationDao.save(operation);
     }
 
+    @Transactional(readOnly = true)
     public List<Operation> findAll() {
         return operationDao.findAll();
     }

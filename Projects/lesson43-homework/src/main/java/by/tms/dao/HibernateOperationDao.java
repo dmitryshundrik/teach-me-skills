@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+//@Repository
 public class HibernateOperationDao implements OperationDao{
 
-    @Autowired
+//    @Autowired
     private SessionFactory sessionFactory;
 
     @Override

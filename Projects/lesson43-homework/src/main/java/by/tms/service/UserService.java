@@ -1,11 +1,12 @@
 package by.tms.service;
 
-import by.tms.dao.HibernateUserDao;
+import by.tms.dao.UserDao;
 import by.tms.entity.Address;
 import by.tms.entity.Telephone;
 import by.tms.entity.User;
 import by.tms.model.RegistrationUserModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,8 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private HibernateUserDao userDao;
+    @Qualifier("jpaUserDao")
+    private UserDao userDao;
 
     public void save(User user) {
         userDao.save(user);
@@ -47,7 +49,6 @@ public class UserService {
         userDao.delete(id);
     }
 
-    @Transactional(readOnly = true)
     public User userModelToUserConverter(RegistrationUserModel registrationUserModel) {
         User user = new User();
         List<Telephone> telephones = new ArrayList<>(2);

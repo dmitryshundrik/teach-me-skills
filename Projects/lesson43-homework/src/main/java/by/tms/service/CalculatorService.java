@@ -1,8 +1,11 @@
 package by.tms.service;
 
 import by.tms.dao.HibernateOperationDao;
+import by.tms.dao.OperationDao;
+import by.tms.dao.UserDao;
 import by.tms.entity.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +14,8 @@ import java.util.List;
 public class CalculatorService {
 
     @Autowired
-    private HibernateOperationDao operationDao;
+    @Qualifier("jpaOperationDao")
+    private OperationDao operationDao;
 
     public void save(Operation operation) {
         operationDao.save(operation);

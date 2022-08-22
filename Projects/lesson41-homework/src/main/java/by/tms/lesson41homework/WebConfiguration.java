@@ -10,7 +10,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SecurityInterceptor())
-                .addPathPatterns("/account", "/account/calc", "/account/history", "/account/settings",
-                        "/user", "/user/logout");
+                .addPathPatterns("/calc", "/calc/history", "/user", "/user/account", "/user/logout");
     }
 }

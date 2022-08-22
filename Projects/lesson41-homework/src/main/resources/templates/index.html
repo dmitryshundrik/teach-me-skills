@@ -16,7 +16,7 @@
     <a th:if="${session.currentUser == null}" href="/user/login">Log In</a>
     <br th:if="${session.currentUser == null}">
 
-    <a th:if="${session.currentUser != null}" href="/calc/main">Calculator</a>
+    <a th:if="${session.currentUser != null}" href="/calc">Calculator</a>
     <br th:if="${session.currentUser != null}">
 
     <a th:if="${session.currentUser != null}" href="/calc/history">History</a>

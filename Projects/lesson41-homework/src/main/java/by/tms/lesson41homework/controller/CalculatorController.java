@@ -20,13 +20,13 @@ public class CalculatorController {
     @Autowired
     private CalculatorService calculatorService;
 
-    @GetMapping("/main")
+    @GetMapping
     public String main(Model model) {
         model.addAttribute("operation", new Operation());
         return "calc";
     }
 
-    @PostMapping("/main")
+    @PostMapping
     public String main(@Valid @ModelAttribute("operation") Operation operation, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "calc";

@@ -1,4 +1,4 @@
-package tms.controller;
+package by.tms.controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

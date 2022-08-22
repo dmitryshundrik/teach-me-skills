@@ -12,7 +12,7 @@
     <title>Registration</title>
 </head>
 <body>
-<s:form method="post" modelAttribute="newUser">
+<s:form action="/user/reg" method="post" modelAttribute="newUser">
     <s:input path="name" placeholder="Name"/>
     <br>
     <s:errors path="name"/>

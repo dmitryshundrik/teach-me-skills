@@ -11,7 +11,7 @@
     <title>Calculator</title>
 </head>
 <body>
-<form action="/app/calc/home" method="post">
+<form action="/calc/main" method="post">
     <input type="text" name="firstNumber" placeholder="First Number">
     <br>
     <br>

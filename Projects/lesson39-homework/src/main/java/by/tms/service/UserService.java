@@ -1,7 +1,7 @@
-package tms.service;
+package by.tms.service;
 
+import by.tms.entity.User;
 import org.springframework.stereotype.Service;
-import tms.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,6 @@
-package tms.controller;
+package by.tms.controller;
 
+import by.tms.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,12 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tms.entity.User;
-import tms.service.UserService;
+import by.tms.service.UserService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("app/user")
+@RequestMapping("user")
 public class UserController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class UserController {
             return "registration";
         } else {
             userService.save(user);
-            return "redirect:/app/calc/home";
+            return "redirect:/calc/main";
         }
     }
 }

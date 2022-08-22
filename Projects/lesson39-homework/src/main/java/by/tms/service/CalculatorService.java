@@ -1,7 +1,7 @@
-package tms.service;
+package by.tms.service;
 
 import org.springframework.stereotype.Service;
-import tms.entity.Calculator;
+import by.tms.entity.Calculator;
 
 @Service
 public class CalculatorService {

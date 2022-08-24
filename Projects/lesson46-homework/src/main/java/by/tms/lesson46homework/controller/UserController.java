@@ -3,8 +3,11 @@ package by.tms.lesson46homework.controller;
 import by.tms.lesson46homework.dao.InMemoryUserDao;
 import by.tms.lesson46homework.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,54 +16,63 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private InMemoryUserDao dao;
+    private InMemoryUserDao userDao;
 
     @PostMapping
-    public User save(@RequestBody User user) {
-        dao.save(user);
-        return null;
+    public ResponseEntity<User> save(@Valid @RequestBody User user) {
+        return new ResponseEntity<>(userDao.save(user), HttpStatus.CREATED);
     }
 
     @GetMapping("/id")
-    public User findById(long id) {
-        Optional<User> user = dao.findById(id);
-        if (user.isPresent()) {
-            return user.get();
+    public ResponseEntity<User> findById(long id) {
+        Optional<User> optionalUser = userDao.findById(id);
+        if (optionalUser.isPresent()) {
+            return ResponseEntity.ok(optionalUser.get());
         }
-        return null;
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/username")
-    public User findByUsername(String username) {
-        Optional<User> user = dao.findByUsername(username);
-        if (user.isPresent()) {
-            return user.get();
+    public ResponseEntity<User> findByUsername(String username) {
+        Optional<User> optionalUser = userDao.findByUsername(username);
+        if (optionalUser.isPresent()) {
+            return ResponseEntity.ok(optionalUser.get());
         }
-        return null;
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/all")
-    public List<User> findAll() {
-        return dao.findAll();
+    public ResponseEntity<List<User>> findAll() {
+        List<User> users = userDao.findAll();
+        if (users.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(users);
     }
 
     @PutMapping()
-    public User update(@RequestBody User user) {
-        User userAfterUpdate = dao.update(user);
-        return userAfterUpdate;
+    public ResponseEntity<User> update(@RequestBody User user) {
+        Optional<User> optionalUser = userDao.update(user);
+        if (optionalUser.isPresent()) {
+            return ResponseEntity.ok(optionalUser.get());
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping
-    public void delete(@RequestBody User user) {
-        dao.delete(user);
+    public ResponseEntity<?> delete(@RequestBody User user) {
+        if (userDao.delete(user)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/id")
-    public User deleteById(long id) {
-        Optional<User> user = dao.deleteById(id);
-        if (user.isPresent()) {
-            return user.get();
+    public ResponseEntity<User> deleteById(long id) {
+        Optional<User> optionalUser = userDao.deleteById(id);
+        if (optionalUser.isPresent()) {
+            return ResponseEntity.ok(optionalUser.get());
         }
-        return null;
+        return ResponseEntity.badRequest().build();
     }
 }

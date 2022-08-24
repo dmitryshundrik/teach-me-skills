@@ -42,18 +42,18 @@ public class InMemoryUserDao {
         return new ArrayList<>(users);
     }
 
-    public User update(User user) {
+    public Optional<User> update(User user) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getId() == user.getId()) {
                 users.set(i, user);
-                return user;
+                return Optional.of(user);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
-    public void delete(User user) {
-        users.remove(user);
+    public boolean delete(User user) {
+        return users.remove(user);
     }
 
     public Optional<User> deleteById(long id) {

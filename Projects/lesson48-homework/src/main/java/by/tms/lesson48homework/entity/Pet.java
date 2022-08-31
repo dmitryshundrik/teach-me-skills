@@ -4,23 +4,24 @@ import by.tms.lesson48homework.status.PetStatus;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-@Builder
+//@Builder
+@Entity
+@Table(name = "pets")
 public class Pet {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
-    private Category category;
     @NotEmpty
     @NotBlank
     private String name;
-    @NotNull
-    private Tag tags;
-    @NotEmpty
-    @NotBlank
+
     private PetStatus status;
 }

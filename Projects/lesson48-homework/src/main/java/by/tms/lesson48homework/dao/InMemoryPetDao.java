@@ -30,14 +30,14 @@ public class InMemoryPetDao {
         return Optional.empty();
     }
 
-    public Optional<List<Pet>> findByStatus(String status) {
+    public List<Pet> findByStatus(String status) {
         List<Pet> statusPetList = new ArrayList<>();
         for (Pet pet : pets) {
             if (pet.getStatus().equals(PetStatus.valueOf(status))) {
                 statusPetList.add(pet);
             }
         }
-        return Optional.of(statusPetList);
+        return statusPetList;
     }
 
     public Optional<Pet> findById(int id) {

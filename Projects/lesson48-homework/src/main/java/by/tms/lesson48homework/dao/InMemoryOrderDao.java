@@ -14,11 +14,14 @@ public class InMemoryOrderDao {
     @Autowired
     private InMemoryPetDao petDao;
 
+    @Autowired
+    private PetRepository petRepository;
+
     private final List<Order> orders = new ArrayList<>();
     private final AtomicInteger atomicInteger = new AtomicInteger(0);
 
     public Optional<Order> placeAnOrder(Order order) {
-        if (petDao.findById(order.getPetId()).isPresent()) {
+        if (petDao.findById(order.getPet().getId()).isPresent()) {
             order.setId(atomicInteger.getAndIncrement());
             orders.add(order);
             return Optional.of(order);
@@ -48,9 +51,9 @@ public class InMemoryOrderDao {
 
     public Optional<Map<PetStatus, Integer>> inventoriesByStatus() {
         Map<PetStatus, Integer> inventories = new HashMap<>();
-        inventories.put(PetStatus.AVAILABLE, petDao.findByStatus(PetStatus.AVAILABLE.name()).get().size());
-        inventories.put(PetStatus.PENDING, petDao.findByStatus(PetStatus.PENDING.name()).get().size());
-        inventories.put(PetStatus.SOLD, petDao.findByStatus(PetStatus.SOLD.name()).get().size());
+//        inventories.put(PetStatus.AVAILABLE, petRepository.findAllByStatus(PetStatus.AVAILABLE).size());
+//        inventories.put(PetStatus.PENDING, petRepository.findAllByStatus(PetStatus.PENDING).size());
+//        inventories.put(PetStatus.SOLD, petRepository.findAllByStatus(PetStatus.SOLD).size());
         return Optional.of(inventories);
     }
 }

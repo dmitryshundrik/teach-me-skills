@@ -5,27 +5,34 @@ import by.tms.lesson48homework.status.PetStatus;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
-@Builder
+//@Builder
+@Entity
+@Table(name = "orders")
 public class Order {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty
-    @NotBlank
-    private int petId;
-    @NotEmpty
-    @NotBlank
+    @NotNull
+    @OneToOne
+    private Pet pet;
+
+    @NotNull
     private int quantity;
+
     @NotEmpty
     @NotBlank
     private String shipDate;
-    @NotEmpty
-    @NotBlank
+
     private OrderStatus status;
-    @NotEmpty
-    @NotBlank
+
+    @NotNull
     private boolean complete;
 }

@@ -59,7 +59,6 @@ public class UserController {
     }
 
     @Operation(summary = "Delete user", description = "This can only be done by the logged in user.")
-    @Transactional
     @DeleteMapping("/{username}")
     public ResponseEntity<?> deleteByUsername(@PathVariable String username) {
         userRepository.myDeleteByUsername(username);

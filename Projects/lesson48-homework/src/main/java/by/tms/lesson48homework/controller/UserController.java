@@ -1,5 +1,6 @@
 package by.tms.lesson48homework.controller;
 
+import by.tms.lesson48homework.config.TokenProvider;
 import by.tms.lesson48homework.dao.UserRepository;
 import by.tms.lesson48homework.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,7 +9,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,12 +23,26 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenProvider tokenProvider;
+
     @Operation(summary = "Create user", description = "This can only be done by the logged in user.",
             responses = @ApiResponse(description = "successful operation"))
-    @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+    @PostMapping("/join")
+    public ResponseEntity<User> join(@Valid @RequestBody User user) {
         User save = userRepository.save(user);
         return new ResponseEntity<>(save, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(String username, String password) {
+        Optional<User> byUsername = userRepository.findByUsername(username);
+        if (byUsername.isPresent()) {
+            User user = byUsername.get();
+            String token = tokenProvider.generateToken(user.getUsername());
+            return ResponseEntity.ok(token);
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @Operation(summary = "Creates list of users with given input array",

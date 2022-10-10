@@ -1,6 +1,6 @@
 package by.tms.lesson48homework.dao;
 
-import by.tms.lesson48homework.entity.User;
+import by.tms.lesson48homework.entity.AppUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,25 +11,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class InMemoryUserDao {
 
-    private final List<User> users = new ArrayList<>();
+    private final List<AppUser> users = new ArrayList<>();
     private final AtomicInteger atomicInteger = new AtomicInteger(0);
 
-    public User createUser(User user) {
+    public AppUser createUser(AppUser user) {
         user.setId(atomicInteger.getAndIncrement());
         users.add(user);
         return user;
     }
 
-    public List<User> createWithList(List<User> userList) {
-        List<User> resultList = new ArrayList<>();
-        for (User user : userList) {
+    public List<AppUser> createWithList(List<AppUser> userList) {
+        List<AppUser> resultList = new ArrayList<>();
+        for (AppUser user : userList) {
             resultList.add(createUser(user));
         }
         return resultList;
     }
 
-    public Optional<User> findByUsername(String username) {
-        for (User user : users) {
+    public Optional<AppUser> findByUsername(String username) {
+        for (AppUser user : users) {
             if (user.getUsername().equals(username)) {
                 return Optional.of(user);
             }
@@ -37,7 +37,7 @@ public class InMemoryUserDao {
         return Optional.empty();
     }
 
-    public Optional<User> updateByUsername(String username, User user) {
+    public Optional<AppUser> updateByUsername(String username, AppUser user) {
         if (username.equals(user.getUsername())) {
             for (int i = 0; i < users.size(); i++) {
                 if (users.get(i).getUsername().equals(username)) {
@@ -48,7 +48,7 @@ public class InMemoryUserDao {
         return Optional.empty();
     }
 
-    public Optional<User> deleteByUsername(String username) {
+    public Optional<AppUser> deleteByUsername(String username) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUsername().equals(username)) {
                 return Optional.of(users.remove(i));

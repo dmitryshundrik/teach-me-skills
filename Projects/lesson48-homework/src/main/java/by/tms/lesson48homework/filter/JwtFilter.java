@@ -1,15 +1,10 @@
 package by.tms.lesson48homework.filter;
 
-import by.tms.lesson48homework.service.UserService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Autowired;
+import by.tms.lesson48homework.config.TokenProvider;
+import by.tms.lesson48homework.exceptions.CustomException;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -23,21 +18,25 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private UserService userService;
+    private final TokenProvider jwtTokenProvider;
 
-    private static final String JWT_SECRET = "awr2r3223ree22g24g43g3443g4g42g";
+    public JwtFilter(TokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = getToken(request);
-        Claims body = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
-        String username = body.getSubject();
-        UserDetails userDetails = userService.loadUserByUsername(username);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-        WebAuthenticationDetails webAuthenticationDetails = new WebAuthenticationDetailsSource().buildDetails(request);
-        authenticationToken.setDetails(webAuthenticationDetails);
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        String token = jwtTokenProvider.resolveToken(request);
+        try {
+            if (token != null && jwtTokenProvider.validateToken(token)) {
+                Authentication authentication = jwtTokenProvider.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (CustomException ex) {
+            SecurityContextHolder.clearContext();
+            response.sendError(ex.getHttpStatus().value(), ex.getMessage());
+        }
         filterChain.doFilter(request, response);
     }
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff</title>
+</head>
+<body>
+<div th:insert="fragments/header.html"></div>
+
+<div class="row my-md-4 justify-content-center">
+    <div class="row col-sm-8 justify-content-center">
+        <h2 style="text-align: center">Наши врачи</h2>
+        <p style="text-align: center">
+            Предлагаем Вам воспользоваться удобным поиском и фильтрами для более быстрого поиска специалистов.
+        </p>
+        <div class="col-sm-6" style="text-align: center;" th:each="doctor : ${staff}">
+            <a th:href="${'/staff/doctor/' + doctor.id}">
+                <img th:src="${'/images/staff/' + doctor.imageId}" style="height: 180px"/>
+                <div th:text="${doctor.firstName} +' '+ ${doctor.lastName}"></div>
+                <div th:text="${doctor.specialty}"></div>
+                <br>
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

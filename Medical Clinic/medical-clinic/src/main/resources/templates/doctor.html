@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Доктор</title>
+</head>
+<body>
+<div th:insert="fragments/header.html"></div>
+
+<div class="row my-md-4 justify-content-center">
+    <div class="row col-sm-8 justify-content-center">
+        <img th:src="${'/images/staff/' + doctor.imageId}" style="height: 180px"/>
+        <div th:text="${doctor.firstName} +' '+ ${doctor.lastName}"></div>
+        <div th:text="${doctor.specialty}"></div>
+        <div th:text="${doctor.info}"></div>
+    </div>
+</div>
+
+</body>
+</html>

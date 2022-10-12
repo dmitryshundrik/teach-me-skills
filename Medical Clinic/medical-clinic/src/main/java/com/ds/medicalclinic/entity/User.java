@@ -18,15 +18,19 @@ public class User {
     @NotBlank
     @NotEmpty
     private String name;
+
     @NotBlank
     @NotEmpty
     private String username;
+
     @NotBlank
     @NotEmpty
     private String email;
+
     @NotBlank
     @NotEmpty
     private String phone;
+
     @NotBlank
     @NotEmpty
     private String password;

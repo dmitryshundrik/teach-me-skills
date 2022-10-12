@@ -17,7 +17,7 @@
             <a th:href="${'/staff/doctor/' + doctor.id}">
                 <img th:src="${'/images/staff/' + doctor.imageId}" style="height: 180px"/>
                 <div th:text="${doctor.firstName} +' '+ ${doctor.lastName}"></div>
-                <div th:text="${doctor.specialty}"></div>
+                <div th:text="${doctor.specialty.displayName}"></div>
                 <br>
             </a>
         </div>

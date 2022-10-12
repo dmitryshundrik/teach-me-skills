@@ -6,22 +6,20 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "doctors")
-public class Doctor {
+@Table(name = "services")
+public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-
-    private String lastName;
-
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
 
-    private String info;
+    private String name;
 
-    private String imageId;
+    private String price;
+
+    private String info;
 
 }

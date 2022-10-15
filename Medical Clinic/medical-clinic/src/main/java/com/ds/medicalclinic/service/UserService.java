@@ -17,8 +17,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public Optional<User> findByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+    public Optional<User> findUserById(Long id) {
+        User user = userRepository.findUserById(id);
+        return Optional.of(user);
+    }
+
+    public Optional<User> findUserByUsername(String username) {
+        User user = userRepository.findUserByUsername(username);
         return Optional.of(user);
     }
 }

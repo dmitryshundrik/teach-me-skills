@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Авторизация</title>
+</head>
+<body>
+<div th:insert="fragments/header.html"> </div>
+
+<div class="row my-md-4 justify-content-center">
+    <div class="row col-sm-8 justify-content-center">
+        <h3 style="text-align: center">Вход</h3>
+
+        <form th:action="@{/user/login}" method="post" th:object="${userModel}" style="text-align: center">
+            <input th:field="*{username}" placeholder="username">
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            <br>
+            <input th:field="*{password}" placeholder="password" type="password">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+            <br>
+            <button style="margin-top: 10px; margin-bottom: 10px">Submit</button>
+            <br>
+        </form>
+        <form action="/static" style="text-align: center">
+            <input type="submit" value="Back" />
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

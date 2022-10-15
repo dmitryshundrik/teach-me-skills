@@ -2,15 +2,13 @@ package com.ds.medicalclinic.controller;
 
 import com.ds.medicalclinic.entity.User;
 import com.ds.medicalclinic.dto.LoginUserDto;
+import com.ds.medicalclinic.service.AppointmentService;
 import com.ds.medicalclinic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -23,16 +21,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AppointmentService appointmentService;
+
     @GetMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("newUser", new User());
-        return "signup";
+        return "account/signup";
     }
 
     @PostMapping("/signup")
     public String signup(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "signup";
+            return "account/signup";
         }
         userService.save(user);
         return "redirect:/";
@@ -41,16 +42,16 @@ public class UserController {
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("userModel", new LoginUserDto());
-        return "login";
+        return "account/login";
     }
 
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("userModel") LoginUserDto user, BindingResult bindingResult,
                         Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
-            return "login";
+            return "account/login";
         }
-        Optional<User> byUsername = userService.findByUsername(user.getUsername());
+        Optional<User> byUsername = userService.findUserByUsername(user.getUsername());
         if (byUsername.isPresent()) {
             User userByUsername = byUsername.get();
             if (userByUsername.getPassword().equals(user.getPassword())) {
@@ -62,7 +63,24 @@ public class UserController {
         } else {
             model.addAttribute("message", "User not found!");
         }
-        return "login";
+        return "account/login";
+    }
+
+    @GetMapping("/account")
+    public String account(Model model, HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        model.addAttribute("appointments", appointmentService.findAllByUserId(currentUser.getId()));
+        model.addAttribute("user", currentUser);
+        return "account/account";
+    }
+
+    @GetMapping("/delete/appointment/{id}")
+    public String deleteAppointment(Model model, HttpSession session, @PathVariable String id) {
+        appointmentService.deleteAppointmentById(Long.valueOf(id));
+        User currentUser = (User) session.getAttribute("currentUser");
+        model.addAttribute("appointments", appointmentService.findAllByUserId(currentUser.getId()));
+        model.addAttribute("user", currentUser);
+        return "account/account";
     }
 
     @GetMapping("/logout")

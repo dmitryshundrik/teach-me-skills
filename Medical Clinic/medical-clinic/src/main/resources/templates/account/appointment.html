@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись на прием</title>
+</head>
+<body>
+<div th:insert="fragments/header.html"></div>
+
+<div class="row justify-content-center">
+    <div class="row col-sm-4 justify-content-center">
+        <form action="/appointment" method="post" th:object="${choiceResult}"
+              style="text-align: center; margin-top: 100px">
+
+            <select id="specialty" class="form-select"
+                    th:field="*{specialtyId}"
+                    th:if="*{specialtyId == null}">
+                <option th:value="-1" selected>выбрать направление</option>
+                <option th:each="specialty : ${@specialtyService.findAllSpecialties()}"
+                        th:value="${specialty.id}"
+                        th:text="${specialty.title}">
+                </option>
+            </select>
+            <input type="hidden" th:field="*{specialtyId}" th:value="${choiceResult.specialtyId}"/>
+
+            <select id="doctors" class="form-select"
+                    th:field="*{doctorId}"
+                    th:if="*{specialtyId != null && doctorId == null}">
+                <option th:value="-1" selected>выбрать врача</option>
+                <option th:each="doctor : ${@doctorService.findAllDoctorsBySpecialtyId(choiceResult.specialtyId)}"
+                        th:value="${doctor.id}"
+                        th:text="${doctor.firstName} + ' ' + ${doctor.lastName}">
+                </option>
+            </select>
+            <input type="hidden" th:field="*{doctorId}" th:value="${choiceResult.doctorId}"/>
+
+            <select id="service" class="form-select"
+                    th:field="*{serviceId}"
+                    th:if="*{specialtyId != null && doctorId != null && serviceId == null}">
+                <option th:value="-1" selected>выбрать услугу</option>
+                <option th:each="service : ${@specialtyService.findSpecialtyById(choiceResult.specialtyId).services}"
+                        th:value="${service.id}"
+                        th:text="${service.title} + ' ' + ${service.price}">
+                </option>
+            </select>
+            <input type="hidden" th:field="*{serviceId}" th:value="${choiceResult.serviceId}"/>
+
+            <div th:if="*{specialtyId != null && doctorId != null && serviceId != null}">
+                <input type="date" th:field="*{date}"/>
+                <input type="hidden" th:field="*{date}" th:value="${choiceResult.date}"/>
+            </div>
+
+            <input type="submit" value="Дальше" style="margin-top: 20px">
+        </form>
+    </div>
+</div>
+</body>
+</html>

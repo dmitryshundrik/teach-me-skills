@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.websocket.server.PathParam;
-
 @Controller
 @RequestMapping("/staff")
 public class DoctorController {
@@ -19,13 +17,13 @@ public class DoctorController {
 
     @GetMapping("/doctor/{id}")
     public String findById(@PathVariable String id, Model model) {
-        model.addAttribute("doctor", doctorService.findById(Long.valueOf(id)).get());
-        return "doctor";
+        model.addAttribute("doctor", doctorService.findDoctorById(Long.valueOf(id)));
+        return "clinic/doctor";
     }
 
     @GetMapping("/all")
     public String findAll(Model model) {
-        model.addAttribute("staff", doctorService.findAll());
-        return "staff";
+        model.addAttribute("staff", doctorService.findAllDoctors());
+        return "clinic/staff";
     }
 }

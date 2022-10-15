@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Staff</title>
+    <title>Специалисты</title>
 </head>
 <body>
 <div th:insert="fragments/header.html"></div>
@@ -17,7 +17,7 @@
             <a th:href="${'/staff/doctor/' + doctor.id}">
                 <img th:src="${'/images/staff/' + doctor.imageId}" style="height: 180px"/>
                 <div th:text="${doctor.firstName} +' '+ ${doctor.lastName}"></div>
-                <div th:text="${doctor.specialty.displayName}"></div>
+                <div th:text="${doctor.specialty.title}"></div>
                 <br>
             </a>
         </div>

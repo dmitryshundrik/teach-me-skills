@@ -13,10 +13,7 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private Specialty specialty;
-
-    private String name;
+    private String title;
 
     private String price;
 

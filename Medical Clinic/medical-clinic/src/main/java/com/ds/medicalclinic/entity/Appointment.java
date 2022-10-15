@@ -1,8 +1,10 @@
 package com.ds.medicalclinic.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -13,9 +15,17 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private User user;
 
-    private String dateTime;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Doctor doctor;
+
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Service service;
+
+    private String date;
+
+
 
 }

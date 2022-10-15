@@ -5,7 +5,6 @@ import com.ds.medicalclinic.entity.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +14,15 @@ public class DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    public Optional<Doctor> findById(Long id) {
-        return doctorRepository.findById(id);
+    public Doctor findDoctorById(Long id) {
+        return doctorRepository.findDoctorById(id);
     }
 
-    public List<Doctor> findAll() {
-        List<Doctor> doctors = new ArrayList<>(doctorRepository.findAll());
-        return doctors;
+    public List<Doctor> findAllDoctors() {
+        return doctorRepository.findAll();
+    }
+
+    public List<Doctor> findAllDoctorsBySpecialtyId(Long specialtyId) {
+        return doctorRepository.findAllBySpecialty_Id(specialtyId);
     }
 }

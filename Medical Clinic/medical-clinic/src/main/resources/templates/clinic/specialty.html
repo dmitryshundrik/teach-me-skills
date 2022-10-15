@@ -10,9 +10,11 @@
 <div class="row my-md-4 justify-content-center">
     <div class="row col-sm-8 justify-content-center">
         <div class="container">
-            <div class="row" th:each="service : ${specialty}"
+            <h2 th:text="${specialty.title}" style="text-align: center; padding-bottom: 20px"></h2>
+            <div th:text="${specialty.info}" style="text-align: center; padding-bottom: 20px"></div>
+            <div class="row" th:each="service : ${specialty.services}"
                  style="border-bottom:1px solid #e5e9ea; margin-bottom: 20px">
-                <div class="col-md-8" th:text="${service.name}"></div>
+                <div class="col-md-8" th:text="${service.title}"></div>
                 <div class="col-6 col-md-4" th:text="${service.price}" style="text-align: right"></div>
             </div>
         </div>

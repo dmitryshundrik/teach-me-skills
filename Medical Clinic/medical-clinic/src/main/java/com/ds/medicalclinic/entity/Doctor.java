@@ -17,7 +17,7 @@ public class Doctor {
 
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
+    @OneToOne(cascade = CascadeType.ALL)
     private Specialty specialty;
 
     private String info;

@@ -1,15 +1,28 @@
 package com.ds.medicalclinic.entity;
 
-public enum Specialty {
-    DERMATOLOGY("Дерматология"), DENTISTRY("Стоматология");
+import lombok.Data;
 
-    private final String displayName;
+import javax.persistence.*;
+import java.util.List;
 
-    Specialty(String s) {
-        displayName = s;
-    }
+@Data
+@Entity
+@Table(name = "specialties")
+public class Specialty {
 
-    public String getDisplayName() {
-        return displayName;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+
+    private String url;
+
+    @Column(columnDefinition="TEXT")
+    private String info;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Service> services;
+
+
 }

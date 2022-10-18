@@ -1,10 +1,8 @@
-package com.ds.medicalclinic.entity;
+package com.ds.medicalclinic.model;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Data
 @Entity

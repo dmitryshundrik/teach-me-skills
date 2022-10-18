@@ -1,6 +1,6 @@
-package com.ds.medicalclinic.dao;
+package com.ds.medicalclinic.repository;
 
-import com.ds.medicalclinic.entity.Doctor;
+import com.ds.medicalclinic.model.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

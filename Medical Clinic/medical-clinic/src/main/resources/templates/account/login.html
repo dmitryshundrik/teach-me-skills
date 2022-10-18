@@ -6,23 +6,19 @@
 <body>
 <div th:insert="fragments/header.html"> </div>
 
-<div class="row my-md-4 justify-content-center">
-    <div class="row col-sm-8 justify-content-center">
-        <h3 style="text-align: center">Вход</h3>
+<div class="row justify-content-center" style="margin-top: 40px">
+    <div class="row col-8">
+        <h4 style="text-align: center">Вход</h4>
+        <form action="login" method="post" style="text-align: center">
+            <input type="text" name="username" placeholder="Логин" style="margin-bottom: 10px"/>
+            <br>
+            <input type="password" name="password" placeholder="Введите пароль" style="margin-bottom: 10px"/>
+            <br>
+            <input type="submit" value="Подтвердить" style="margin-bottom: 10px"/>
+            <br>
+            <div class="alert" th:if="${message}" th:text="${message}"></div>
+        </form>
 
-        <form th:action="@{/user/login}" method="post" th:object="${userModel}" style="text-align: center">
-            <input th:field="*{username}" placeholder="username">
-            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
-            <br>
-            <input th:field="*{password}" placeholder="password" type="password">
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-            <br>
-            <button style="margin-top: 10px; margin-bottom: 10px">Submit</button>
-            <br>
-        </form>
-        <form action="/static" style="text-align: center">
-            <input type="submit" value="Back" />
-        </form>
     </div>
 </div>
 

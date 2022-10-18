@@ -1,10 +1,12 @@
 package com.ds.medicalclinic.controller;
 
-import com.ds.medicalclinic.entity.User;
-import com.ds.medicalclinic.dto.LoginUserDto;
+import com.ds.medicalclinic.dto.UserDto;
+import com.ds.medicalclinic.exception.UserAlreadyExistException;
+import com.ds.medicalclinic.model.User;
 import com.ds.medicalclinic.service.AppointmentService;
 import com.ds.medicalclinic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
@@ -24,51 +25,41 @@ public class UserController {
     @Autowired
     private AppointmentService appointmentService;
 
+    @GetMapping("/login")
+    public String login() {
+        return "account/login";
+    }
+
+    @GetMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("message", "Неверный логин и/или пароль");
+        return "account/login";
+    }
+
     @GetMapping("/signup")
     public String signup(Model model) {
-        model.addAttribute("newUser", new User());
+        model.addAttribute("userDto", new UserDto());
         return "account/signup";
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult) {
+    public String signup(@Valid @ModelAttribute("userDto") UserDto userDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("message", "Заполните все поля");
             return "account/signup";
         }
-        userService.save(user);
+        try {
+            userService.save(userDto);
+        } catch (UserAlreadyExistException uaeEx) {
+            model.addAttribute("message", "An account for that username already exists.");
+            return "account/signup";
+        }
         return "redirect:/";
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("userModel", new LoginUserDto());
-        return "account/login";
-    }
-
-    @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("userModel") LoginUserDto user, BindingResult bindingResult,
-                        Model model, HttpSession session) {
-        if (bindingResult.hasErrors()) {
-            return "account/login";
-        }
-        Optional<User> byUsername = userService.findUserByUsername(user.getUsername());
-        if (byUsername.isPresent()) {
-            User userByUsername = byUsername.get();
-            if (userByUsername.getPassword().equals(user.getPassword())) {
-                session.setAttribute("currentUser", userByUsername);
-                return "redirect:/";
-            } else {
-                model.addAttribute("message", "Wrong password!");
-            }
-        } else {
-            model.addAttribute("message", "User not found!");
-        }
-        return "account/login";
-    }
-
     @GetMapping("/account")
-    public String account(Model model, HttpSession session) {
-        User currentUser = (User) session.getAttribute("currentUser");
+    public String account(Model model) {
+        User currentUser = userService.findCurrentUser();
         model.addAttribute("appointments", appointmentService.findAllByUserId(currentUser.getId()));
         model.addAttribute("user", currentUser);
         return "account/account";
@@ -77,15 +68,23 @@ public class UserController {
     @GetMapping("/delete/appointment/{id}")
     public String deleteAppointment(Model model, HttpSession session, @PathVariable String id) {
         appointmentService.deleteAppointmentById(Long.valueOf(id));
-        User currentUser = (User) session.getAttribute("currentUser");
+        User currentUser = userService.findCurrentUser();
         model.addAttribute("appointments", appointmentService.findAllByUserId(currentUser.getId()));
         model.addAttribute("user", currentUser);
         return "account/account";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    @GetMapping("/delete/account")
+    public String deleteAccount(HttpSession session) {
+        User currentUser = userService.findCurrentUser();
+        userService.deleteUserById(currentUser.getId());
         session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        SecurityContextHolder.clearContext();
         return "redirect:/";
     }
 }

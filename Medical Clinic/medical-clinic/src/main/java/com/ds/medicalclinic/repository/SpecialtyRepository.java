@@ -1,6 +1,6 @@
-package com.ds.medicalclinic.dao;
+package com.ds.medicalclinic.repository;
 
-import com.ds.medicalclinic.entity.Specialty;
+import com.ds.medicalclinic.model.Specialty;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SpecialtyRepository extends JpaRepository<Specialty, Long> {

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChoiceResult {
+public class ChoiceResultDto {
     private Long specialtyId;
     private Long doctorId;
     private Long serviceId;

@@ -5,35 +5,29 @@
     <title>Регистрация</title>
 </head>
 <body>
-<div th:insert="fragments/header.html"> </div>
+<div th:insert="fragments/header.html"></div>
 
-<div class="row my-md-4 justify-content-center">
-  <div class="row col-sm-8 justify-content-center">
-    <h3 style="text-align: center">Регистрация</h3>
+<div class="row justify-content-center" style="margin-top: 40px">
+    <div class="row col-8">
+        <h4 style="text-align: center">Регистрация</h4>
 
-    <form th:action="@{/user/signup}" method="post" th:object="${newUser}" style="text-align: center">
-      <input th:field="*{name}" placeholder="name">
-      <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-      <br>
-      <input th:field="*{username}" placeholder="username">
-      <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
-      <br>
-      <input th:field="*{email}" placeholder="email">
-      <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-      <br>
-      <input th:field="*{phone}" placeholder="phone">
-      <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
-      <br>
-      <input th:field="*{password}" placeholder="password" type="password">
-      <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-      <br>
-      <button style="margin-top: 10px; margin-bottom: 10px">Submit</button>
-      <br>
-    </form>
-    <form action="/static" style="text-align: center">
-      <input type="submit" value="Back" />
-    </form>
-  </div>
+        <form th:action="@{/user/signup}" method="post" th:object="${userDto}" style="text-align: center">
+            <input th:field="*{firstName}" placeholder="Имя" style="margin-bottom: 10px">
+            <br>
+            <input th:field="*{lastName}" placeholder="Фамилия" style="margin-bottom: 10px">
+            <br>
+            <input th:field="*{username}" placeholder="Логин" style="margin-bottom: 10px">
+            <br>
+            <input th:field="*{phone}" placeholder="Номер телефона" style="margin-bottom: 10px">
+            <br>
+            <input th:field="*{password}" placeholder="Пароль" type="password" style="margin-bottom: 10px">
+            <br>
+            <input type="submit" value="Подтвердить" style="margin-bottom: 10px"/>
+            <br>
+            <div class="alert" th:if="${message}" th:text="${message}"></div>
+
+        </form>
+    </div>
 </div>
 
 </body>

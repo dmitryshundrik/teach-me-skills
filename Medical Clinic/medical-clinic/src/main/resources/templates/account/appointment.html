@@ -8,8 +8,8 @@
 <div th:insert="fragments/header.html"></div>
 
 <div class="row justify-content-center">
-    <div class="row col-sm-4 justify-content-center">
-        <form action="/appointment" method="post" th:object="${choiceResult}"
+    <div class="col-4 justify-content-center">
+        <form action="/appointment" method="post" th:object="${choiceResultDto}"
               style="text-align: center; margin-top: 100px">
 
             <select id="specialty" class="form-select"
@@ -21,33 +21,33 @@
                         th:text="${specialty.title}">
                 </option>
             </select>
-            <input type="hidden" th:field="*{specialtyId}" th:value="${choiceResult.specialtyId}"/>
+            <input type="hidden" th:field="*{specialtyId}" th:value="${choiceResultDto.specialtyId}"/>
 
             <select id="doctors" class="form-select"
                     th:field="*{doctorId}"
                     th:if="*{specialtyId != null && doctorId == null}">
                 <option th:value="-1" selected>выбрать врача</option>
-                <option th:each="doctor : ${@doctorService.findAllDoctorsBySpecialtyId(choiceResult.specialtyId)}"
+                <option th:each="doctor : ${@doctorService.findAllDoctorsBySpecialtyId(choiceResultDto.specialtyId)}"
                         th:value="${doctor.id}"
                         th:text="${doctor.firstName} + ' ' + ${doctor.lastName}">
                 </option>
             </select>
-            <input type="hidden" th:field="*{doctorId}" th:value="${choiceResult.doctorId}"/>
+            <input type="hidden" th:field="*{doctorId}" th:value="${choiceResultDto.doctorId}"/>
 
             <select id="service" class="form-select"
                     th:field="*{serviceId}"
                     th:if="*{specialtyId != null && doctorId != null && serviceId == null}">
                 <option th:value="-1" selected>выбрать услугу</option>
-                <option th:each="service : ${@specialtyService.findSpecialtyById(choiceResult.specialtyId).services}"
+                <option th:each="service : ${@specialtyService.findSpecialtyById(choiceResultDto.specialtyId).services}"
                         th:value="${service.id}"
                         th:text="${service.title} + ' ' + ${service.price}">
                 </option>
             </select>
-            <input type="hidden" th:field="*{serviceId}" th:value="${choiceResult.serviceId}"/>
+            <input type="hidden" th:field="*{serviceId}" th:value="${choiceResultDto.serviceId}"/>
 
             <div th:if="*{specialtyId != null && doctorId != null && serviceId != null}">
-                <input type="date" th:field="*{date}"/>
-                <input type="hidden" th:field="*{date}" th:value="${choiceResult.date}"/>
+                <input style="font-size: 22px" type="date" th:field="*{date}"/>
+                <input type="hidden" th:field="*{date}" th:value="${choiceResultDto.date}"/>
             </div>
 
             <input type="submit" value="Дальше" style="margin-top: 20px">

@@ -7,11 +7,11 @@
 <body>
 <div th:insert="fragments/header.html"></div>
 
-<div class="row my-md-4 justify-content-center">
-    <div class="row col-sm-8 justify-content-center">
+<div class="row justify-content-center" style="margin-top: 40px; background-color: #e8e8ea">
+    <div class="row col-8 justify-content-center" style="background-color: white">
         <h2 style="text-align: center">Наши врачи</h2>
         <p style="text-align: center">
-            Предлагаем Вам воспользоваться удобным поиском и фильтрами для более быстрого поиска специалистов.
+            Предлагаем Вам воспользоваться удобным поиском для более быстрого поиска специалистов.
         </p>
         <div class="col-sm-6" style="text-align: center;" th:each="doctor : ${staff}">
             <a th:href="${'/staff/doctor/' + doctor.id}">

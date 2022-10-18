@@ -1,4 +1,4 @@
-package com.ds.medicalclinic.entity;
+package com.ds.medicalclinic.model;
 
 import lombok.Data;
 

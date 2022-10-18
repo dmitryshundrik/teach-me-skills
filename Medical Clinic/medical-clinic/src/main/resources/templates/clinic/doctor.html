@@ -7,8 +7,8 @@
 <body>
 <div th:insert="fragments/header.html"></div>
 
-<div class="row my-md-4 justify-content-center">
-    <div class="row col-sm-8 justify-content-center">
+<div class="row justify-content-center" style="margin-top: 40px">
+    <div class="row col-8 justify-content-center">
         <img th:src="${'/images/staff/' + doctor.imageId}" style="height: 250px; width: auto; margin-bottom: 20px"/>
         <h2 th:text="${doctor.firstName} +' '+ ${doctor.lastName}" style="text-align: center"></h2>
         <div th:text="${doctor.specialty.title}" style="text-align: center"></div>

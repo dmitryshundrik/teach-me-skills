@@ -20,7 +20,6 @@
             </Policies>
         </RollingFile>
     </Appenders>
-
     <Loggers>
         <Root level="info">
             <AppenderRef ref="Console" />
@@ -28,5 +27,4 @@
         </Root>
         <Logger name="com.ds.medicalclinic" level="info"></Logger>
     </Loggers>
-
 </Configuration>

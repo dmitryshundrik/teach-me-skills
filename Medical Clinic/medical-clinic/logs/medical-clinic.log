@@ -1,0 +1,60 @@
+2023-01-26 17:16:50,593 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 6.2.3.Final
+2023-01-26 17:16:50,712 INFO o.s.b.StartupInfoLogger [restartedMain] Starting MedicalClinicApplication using Java 11.0.13 on LAPTOP-EM6QKFFJ with PID 416508 (C:\TeachMeSkills\Medical Clinic\medical-clinic\target\classes started by user in C:\TeachMeSkills\Medical Clinic\medical-clinic)
+2023-01-26 17:16:50,727 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-01-26 17:16:50,888 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-01-26 17:16:50,890 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-01-26 17:16:53,796 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-26 17:16:54,162 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 313 ms. Found 5 JPA repository interfaces.
+2023-01-26 17:16:56,769 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-01-26 17:16:56,861 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-01-26 17:16:56,867 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-01-26 17:16:56,869 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-01-26 17:16:57,396 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-01-26 17:16:57,397 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 6504 ms
+2023-01-26 17:16:57,980 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-26 17:16:58,181 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.10.Final
+2023-01-26 17:16:58,573 INFO o.h.a.c.r.j.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-01-26 17:16:58,911 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-01-26 17:16:59,382 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-01-26 17:16:59,423 INFO o.h.d.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-01-26 17:17:04,319 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,320 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] отношение "appointments" не существует, пропускается
+2023-01-26 17:17:04,322 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,323 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] отношение "appointments" не существует, пропускается
+2023-01-26 17:17:04,325 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,326 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] отношение "appointments" не существует, пропускается
+2023-01-26 17:17:04,328 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,329 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] отношение "doctors" не существует, пропускается
+2023-01-26 17:17:04,331 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,332 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] отношение "specialties_services" не существует, пропускается
+2023-01-26 17:17:04,334 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,335 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] отношение "specialties_services" не существует, пропускается
+2023-01-26 17:17:04,337 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,338 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] отношение "user_user_roles" не существует, пропускается
+2023-01-26 17:17:04,340 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,341 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] таблица "appointments" не существует, пропускается
+2023-01-26 17:17:04,343 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,344 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] таблица "doctors" не существует, пропускается
+2023-01-26 17:17:04,346 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,347 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] таблица "services" не существует, пропускается
+2023-01-26 17:17:04,349 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,349 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] таблица "specialties" не существует, пропускается
+2023-01-26 17:17:04,351 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,351 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] таблица "specialties_services" не существует, пропускается
+2023-01-26 17:17:04,353 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,353 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] таблица "user_user_roles" не существует, пропускается
+2023-01-26 17:17:04,355 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] SQL Warning Code: 0, SQLState: 00000
+2023-01-26 17:17:04,356 WARN o.h.e.j.s.SqlExceptionHelper$StandardWarningHandler [restartedMain] таблица "users" не существует, пропускается
+2023-01-26 17:17:05,089 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-26 17:17:05,115 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-26 17:17:06,647 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-26 17:17:07,735 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2e53ccf, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@474029d, org.springframework.security.web.context.SecurityContextPersistenceFilter@555b8ff4, org.springframework.security.web.header.HeaderWriterFilter@3e6b423b, org.springframework.security.web.authentication.logout.LogoutFilter@447a3a8f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@67705e85, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5c2cc91, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3161399e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@13f0a13b, org.springframework.security.web.session.SessionManagementFilter@7190eee2, org.springframework.security.web.access.ExceptionTranslationFilter@648595d4, org.springframework.security.web.access.intercept.AuthorizationFilter@4453f7c0]
+2023-01-26 17:17:08,215 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2023-01-26 17:17:08,928 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-01-26 17:17:08,994 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-01-26 17:17:09,059 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-26 17:17:09,098 INFO o.s.b.StartupInfoLogger [restartedMain] Started MedicalClinicApplication in 20.364 seconds (JVM running for 26.62)
+2023-01-26 17:21:06,899 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-26 17:21:06,901 INFO o.h.t.s.i.SchemaDropperImpl$DelayedDropActionImpl [SpringApplicationShutdownHook] HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2023-01-26 17:21:07,799 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-01-26 17:21:08,107 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
